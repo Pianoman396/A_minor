@@ -1,0 +1,4 @@
+@function get-vw($target, $viewport) {
+	$vw-context: ($viewport * 0.01);
+	@return ($target / $vw-context) * 1vw;
+}

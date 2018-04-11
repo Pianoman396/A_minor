@@ -1,0 +1,138 @@
+$trans-time: 0.2s;
+$trans-type: linear;
+
+@mixin transition($property: null, $value: null) {
+	@if($value == null) {
+		$value: $trans-time $trans-type;
+	}
+	@if($property == null) {
+		$property: all;
+	}
+	@if($property == none) {
+		$value: null;
+	}
+
+	-webkit-transition: $property $value;
+	-moz-transition: $property $value;
+	-o-transition: $property $value;
+	transition: $property $value;
+}
+
+@mixin box-sizing ($value) {
+	-webkit-box-sizing: $value;
+	-moz-box-sizing: $value;
+	box-sizing: $value;
+}
+
+@mixin transform ($value) {
+	-webkit-transform: $value;
+	-moz-transform: $value;
+	-o-transform: $value;
+	-ms-transform: $value;
+	transform: $value;
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {@content}
+  &:-moz-placeholder           {@content}
+  &::-moz-placeholder          {@content}
+  &:-ms-input-placeholder      {@content}
+}
+
+@mixin background-gradient($type, $value...) {
+	background: -webkit-#{$type}-gradient($value);
+	background: -moz-#{$type}-gradient($value);
+	background: -o-#{$type}-gradient($value);
+	background: #{$type}-gradient($value);
+}
+
+@mixin no-decoration {
+	text-decoration: none;
+
+	&:hover,
+	&:active,
+	&:visited,
+	&:focus {
+		text-decoration: none;
+	}
+}
+
+@mixin clearfix() {
+	&:after,
+	&:before {
+		clear: both;
+	}
+}
+
+@mixin position($type: null, $normalize: null, $full: null) {
+  	@if($type == null) {
+		$type: relative;
+	}
+	position: $type;
+
+	@if($normalize == 'top-left') {
+		top: 0;
+		left: 0;
+	}
+
+	@if($normalize == 'bottom-left') {
+		bottom: 0;
+		left: 0;
+	}
+
+	@if($normalize == 'top-right') {
+		top: 0;
+		right: 0;
+	}
+
+	@if($normalize == 'top-center') {
+		top: 0;
+		left: 50%;
+		@include transform(translateX(-50%));
+	}
+
+	@if($normalize == 'left-center') {
+		top: 50%;
+		left: 0;
+		@include transform(translateY(-50%));
+	}
+
+	@if($normalize == 'right-center') {
+		top: 50%;
+		right: 0;
+		@include transform(translateY(-50%));
+	}
+
+	@if($normalize == 'center-center') {
+		top: 50%;
+		left: 50%;
+		@include transform(translateX(-50%) translateY(-50%));
+	}
+
+	@if($full == true) {
+		width: 100%;
+		height: 100%;
+	}
+
+	@if($full == 'full-y') {
+		height: 100%;
+	}
+
+	@if($full == 'full-x') {
+		width: 100%;
+	}
+}
+
+@mixin user-select($value) {
+	-webkit-user-select: $value;
+	-moz-user-select: $value;
+	-o-user-select: $value;
+	-ms-user-select: $value;
+	user-select: $value;
+}
+
+@mixin background-clip($value) {
+	-webkit-background-clip: $value;
+	-moz-background-clip: $value;
+	background-clip: $value;
+}

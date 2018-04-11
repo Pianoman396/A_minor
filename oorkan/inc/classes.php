@@ -1,0 +1,1 @@
+<?php  abspath_check("ABSPATH"); require_once("classes-inc/quiz.php"); require_once("classes-inc/vc-rout.php"); ?>

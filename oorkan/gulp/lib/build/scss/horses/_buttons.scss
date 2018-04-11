@@ -1,0 +1,27 @@
+a.button {
+	text-decoration: none;
+}
+
+.button {
+	color: inherit;
+	$button-prefix: 'button--';
+
+	font-size: 16px;
+	display: inline-block;
+	cursor: pointer;
+
+	&.#{$button-prefix}small {
+		font-size: 12px;
+		padding: 8px 18px;
+	}
+
+	&.#{$button-prefix}medium {
+		font-size: 16px;
+		padding: 10px 18px;
+	}
+
+	&.#{$button-prefix}extra {
+		font-size: 1.8em;
+		padding: 0.6em 1.2em;
+	}
+}

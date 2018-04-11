@@ -1,0 +1,6 @@
+@mixin set-grid($colnums, $gap, $text-align) {
+    display: grid;
+    grid-template-columns: repeat($colnums, auto);
+    grid-gap: $gap;
+    text-align: $text-align;
+}

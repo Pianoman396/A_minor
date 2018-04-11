@@ -1,0 +1,64 @@
+
+
+      /*===== QUIZESS STYLES=====*/
+      .oo .ginput_container_date>.clear-multi>.gfield_date_month label, .ginput_container_date>.clear-multi>.gfield_date_day label, .ginput_container_date>.clear-multi>.gfield_date_year label{
+        display:none;
+      }
+      .oo .ginput_container_date>.clear-multi>.gfield_date_dropdown_year>select>option:not(:first-child) + option:not(:nth-child(1)) + option:not(:nth-child(2)){
+        display:none;
+      }
+      /*========== input placeholder styles ==========*/
+
+      /* SLIDE 2 STYLES */
+      /* checkboxes  */
+      .oo ul.gfield_checkbox li input {
+        width:5% !important;
+      }
+
+      .oo ul.gfield_checkbox li label {
+        font-size:4em ;
+      }
+      .oo ul.gform_fields li.gfield div.gsection_description {
+        font-size:3em !important;
+      }
+
+      /* CHECKBOX STYLES */
+      /* COMMON STYLES */
+    .oo {
+      .wpb_wrapper>ul li, .wpb_wrapper>.oo-hz_slider>ul li {
+        border: 2px solid $color-main;
+        border-radius: 3px;
+        color: $color-main;
+      }
+      /* SLECIFIC STYLES */
+      /*  MEETING PLACE AND WHAT TO PURCHASE STYLES */
+      .oo_meeting_loc>li, .oo_purchase>li {
+        position: relative;
+      }
+      .oo_meeting_loc>li>label, .oo_purchase>li>label {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        padding: 5px 10px;
+        text-align: left;
+        display: block;
+        cursor: pointer;
+        font-size: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      .oo_meeting_loc>li>label>.oo_alphabet, .oo_purchase>li>label>.oo_alphabet {
+        display: inline-block;
+        border: 1px solid $color-main;
+        border-radius: 3px;
+        margin-right: 10px;
+        width:24px;
+        height:26px;
+        text-align: center;
+        background-color: $color-hover;
+      }
+    }

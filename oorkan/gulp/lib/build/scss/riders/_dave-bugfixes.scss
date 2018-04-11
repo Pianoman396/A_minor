@@ -1,0 +1,78 @@
+// Form Fields
+
+.oo {
+	&.vc_column_container {
+		.ginput_container_date {
+			.clear-multi {
+				width: 100%;
+			}
+		}
+
+		.wpb_wrapper {
+			> ul {
+				&.oo_attenders {
+					> li {
+						&:not(:last-of-type) {
+							border-right: none;
+							border-top-right-radius: 0px;
+							border-bottom-right-radius: 0px;
+						}
+
+						&:not(:first-of-type) {
+							border-top-left-radius: 0px;
+							border-bottom-left-radius: 0px;
+						}
+
+						.people--amount {
+							@include position(absolute, "center-center");
+						}
+					}
+				}
+			}
+		}
+	}
+}
+.oo-hz_slider>ul>li>label {
+	.style_description {
+		display: block;
+		position: relative;
+		height: 100%;
+
+		> img {
+			display: block;
+			width: auto;
+			@include position(absolute, "center-center");
+		}
+	}
+}
+
+.oo_grid-2x2>li>label {
+	.style_description {
+		display: inline-block;
+		height: 215px;
+		overflow-y: hidden;
+		 img {
+			display: inline-block;
+		}
+	}
+}
+.oo-hz_slider>ul>li>label img {
+	max-height: 100px;
+	padding: 0 8%;
+	top: 35% !important;
+}
+.custom_checkbox::after {
+	display: block;
+	opacity: 0;
+}
+
+.oo_meeting_loc > li > label > input:checked ~ .custom_checkbox::after, .oo_purchase > li > label > input:checked ~ .custom_checkbox::after {
+	opacity: 1;
+	border-width: 0 4px 4px 0;
+}
+
+
+.oo_meeting_loc > li > label .custom_checkbox::after, .oo_purchase > li > label .custom_checkbox::after {
+	border-width: 0;
+	transition: border-width 0.15s cubic-bezier(.36,1.05,.59,.55);
+}

@@ -1,0 +1,71 @@
+/*===== hiding default checkbox/radio =====*/
+
+input[type='checkbox'], input[type='radio'] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.oo_meeting_loc, .oo_purchase {
+  /*========== Step 2 and 5 checkmarks ==========*/
+
+  /*========== meeting location and purchase checkmarks ==========*/
+  input[type='radio'], input[type='checkbox'] {
+    /*===== creating custom_checkbox =====*/
+    & ~ span.custom_checkbox:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+    /*====== label hover ======*/
+    & ~ span.label-wrapper {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      border: 1px solid transparent;
+      background-color: $color-hover;
+    }
+    /*===== styling the checktick =====*/
+    & ~ span.custom_checkbox:after{
+      right: 20px;
+      top: 8px;
+      width: 6px;
+      height: 15px;
+      border: solid $color-main;
+      border-width: 0 4px 4px 0;
+      -webkit-transform: $checktick-degree;
+      -ms-transform: $checktick-degree;
+      transform: $checktick-degree;
+    }
+  }
+  /*========= CHECKED STYLES =========*/
+  input[type='radio']:checked, input[type='checkbox']:checked {
+    & ~ span.custom_checkbox:after, {
+      display: block;
+    }
+    & ~ span.label-wrapper {
+      border: 1px solid $color-main;
+      background-color: $color-hover;
+    }
+  }
+}
+/*========== Steps 3 and 4 ==========*/
+.oo_grid-2x2, .oo-hz_slider {
+  input[type='checkbox'] {
+    & ~ span.custom--checkbox {
+      // from grid-dpnd.scss line 66- 71
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 30px;
+      height: 25px;
+      z-index: 5;
+    }
+  }
+}
+
+
+
+/*===== triangle check =====*/

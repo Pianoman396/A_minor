@@ -1,0 +1,139 @@
+// This file is temporary, the things inside grids never should be dependent from
+// grid classes
+
+
+
+/*========== GALLERY GRIDS AND DASHED BORDERS =========*/
+
+      .oo_grid-2x2, .oo_purchase {
+        padding: 25px 30px 5px 30px;
+        border-left: 1px dashed $color-main;
+        position: relative;
+      }
+
+      /*  CHOOSE AS MANY AS YOU LIKE STYLE */
+      .oo_grid-2x2>h4, .oo_purchase>h4, .oo-hz_slider>h4  {
+        position:absolute;
+        left: 30px;
+        color: $color-main;
+        font-size: 14px;
+      }
+      .oo_grid-2x2>h4, .oo_purchase>h4 {
+        top:0;
+      }
+
+      /*========== GALLERY GRIDS AND DASHED BORDERS =========*/
+      .oo-hz_slider:before{
+        content: "";
+        position:absolute;
+        left:0;
+        height:300px;
+        border:.5px dashed $color-main;
+      }
+
+      /* GALLERY STYLES/ CHECKBOXES */
+      .oo_grid-2x2>li, .oo-hz_slider>ul>li {
+        position: relative;
+      }
+
+      .oo_grid-2x2>li>label>span.label-wrapper, .oo-hz_slider>ul>li>label>span.label-wrapper {
+        position: absolute;
+        top:0;
+        right:0;
+        bottom:0;
+        left:0;
+        opacity: 0.3;
+        z-index: 1;
+        cursor:pointer;
+      }
+      .oo_grid-2x2>li>label>span.label-wrapper:hover, .oo-hz_slider>ul>li>label>span.label-wrapper:hover {
+        background-color: $color-hover;
+      }
+      /* Create a custom checkbox */
+      .oo_grid-2x2>li>label>.custom--checkbox, .oo-hz_slider>ul>li>label>.custom--checkbox {
+        // position: absolute;
+        // top: 0;
+        // right: 0;
+        // width: 30px;
+        // height: 25px;
+        // z-index: 5;
+      }
+      /* When the checkbox is checked, add a blue background */
+      .oo_grid-2x2>li>label input:checked ~ span.label-wrapper, .oo-hz_slider>ul>li>label input:checked ~ span.label-wrapper {
+        background-color: $color-selected;
+      }
+
+      .oo_grid-2x2>li>label input:checked ~ .custom--checkbox:before, .oo-hz_slider>ul>li>label input:checked ~ .custom--checkbox:before {
+        content: "";
+        display: block;
+        position: absolute;
+        z-index:0;
+        top:0;
+        right:0;
+        width:0px;
+        height:0px;
+        border: 25px solid transparent;
+        border-top-color: $color-main;
+        border-right-color: $color-main;
+      }
+
+      /* Create the checkmark/indicator (hidden when not checked) */
+      .oo_grid-2x2>li>label>.custom--checkbox:after, .oo-hz_slider>ul>li>label>.custom--checkbox:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+
+      /* Show the checkmark when checked */
+      .oo_grid-2x2>li>label input:checked ~ .custom--checkbox:after, .oo-hz_slider>ul>li>label input:checked ~ .custom--checkbox:after {
+        display: block;
+      }
+
+      /* Style the checkmark/indicator */
+      .oo_grid-2x2>li>label .custom--checkbox:after, .oo-hz_slider>ul>li>label .custom--checkbox:after {
+        width: 6px;
+        height: 15px;
+        top: 5px;
+        right: 9px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: $checktick-degree;
+        -ms-transform: $checktick-degree;
+        transform: $checktick-degree;
+      }
+
+      .oo_grid-2x2>li>label>.custom--checkbox--letter {
+        position: absolute;
+        bottom:20px;
+        left: 0;
+        right:0;
+      }
+
+      .oo_grid-2x2>li>label>.custom--checkbox--letter,
+      .oo-hz_slider>ul>li>label>.custom--checkbox--letter {
+        &, & > .image_key, & > .image_alt {
+          font-style: normal;
+          display: inline-block;
+        }
+        .image_key {
+          border: 1px solid $color-main;
+          border-radius: 3px;
+          margin-right: 4px;
+          width: 24px;
+          height: 26px;
+          text-align: center;
+          background-color: $color-hover;
+        }
+
+        .image_alt {
+          font-size: 10px;
+          text-transform: lowercase;
+          margin-left: 3px;
+        }
+      }
+      .oo-hz_slider>ul>li>label>.custom--checkbox--letter {
+        position: absolute;
+        bottom:15px;
+        left: 0;
+        right:0
+      }

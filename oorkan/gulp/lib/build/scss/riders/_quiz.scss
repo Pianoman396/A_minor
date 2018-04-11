@@ -1,0 +1,88 @@
+.oo {
+    &.vc_column_container {
+      @include position(absolute, "top-center");
+      width: 65%;
+      height: calc(100% - 265px);
+      float: none;
+      overflow-y: auto;
+
+	    ul li {
+    	    list-style: none;
+      	}
+
+       	.gform_body {
+        	text-align: left !important;
+      	}
+
+      	// description styles
+
+       	.gfield_description {
+       		font-size: 3em;
+      	}
+
+      	// label styles
+
+       	form .gfield_label {
+        	font-size:5em !important;
+      	}
+
+      	// date imput container styles
+
+       	.clear-multi {
+       		width:50%;
+      	}
+
+      	// date imput styles
+
+       	.ginput_container_date>.clear-multi>div {
+        	display:inline-block;
+        	width: 30%;
+        	font-size: 0.8em;
+      	}
+
+
+      	/*all imput styles*/
+
+      	.gform_wrapper {
+      		input, select {
+      			border: 2px solid $color-main;
+      			border-radius: 5px;
+      			font-size: 6em;
+      			background-color: #fff;
+      		}
+      	}
+        select {
+          -moz-appearance: none;
+          text-indent: 0.01px;
+          text-overflow: '';
+        }
+
+      	label {
+      	  	font-size: 3em !important;
+      	}
+
+      	/* full-width imput */
+
+      	.gform_body input {
+      		width: 100%;
+      	}
+
+      	/* submit button */
+
+	   	.gform_footer {
+      		text-align: left !important;
+      	}
+
+      	.gform_footer input {
+      		font-size: 4em !important;
+      		background-color: $color-main !important;
+      		color:#FFFFFF !important;
+      		font-weight: 600;
+      	}
+    }
+}
+
+ /* hiding the submit button*/
+.quiz-slide:not(:last-child) .oo .gform_footer {
+	display:none;
+}

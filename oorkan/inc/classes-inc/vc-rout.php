@@ -1,0 +1,1 @@
+<?php abspath_check("ABSPATH"); include_once("VC/add-elem.php"); include_once("VC/minmax.php"); include_once("VC/add-meething-place.php"); include_once("VC/group-looking.php");  //include_once("VC/add-meething-place.php"); ?>

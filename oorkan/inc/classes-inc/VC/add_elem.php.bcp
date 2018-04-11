@@ -1,0 +1,182 @@
+<?php abspath_check("ABSPATH"); require_once vc_path_dir( 'SHORTCODES_DIR', 'vc-single-image.php' );
+
+class WPBakeryShortCode_VC_image_checklist extends WPBakeryShortCode_VC_Single_image {}
+
+    function vc_image_checklist_output($atts, $content = null){
+      extract(
+          shortcode_atts(
+            array(
+              "el_class" => "",
+              "images" => "",
+              "image_size" => "",
+              "grid_type" => "2x2",
+            ), $atts
+          )
+        );
+
+      if(strpos($image_size, "x") > 0) {
+        $image_size = explode("x", $image_size);
+        array_walk($image_size, function($item) {$item .= "px";});
+      }
+
+       $output = do_shortcode($content);
+       $images_ids = $images !== "" ? explode(',',trim($images)) : false;
+
+       //DONE
+       if($images_ids){
+            $output .= '<ul class="'. esc_attr($el_class) .' oo_grid--type--'.$grid_type.'" data-name="">';
+            $alphabet = range("A","Z");
+
+            $attrs = [
+                    "class" => "attachment-thumbnail",
+                    "src" => vc_asset_url( 'vc/blank.gif' )
+            ];
+
+            $j = 0;
+            foreach ( $images_ids as $image ) {
+              $img = wp_get_attachment_image($image, $image_size, $attrs);
+              if(isset($image_size)){
+                   $output .= '<li><input type="checkbox" class="img_check"><span class="custom--checkbox"></span><span class="custom--checkbox--letter"> ' . $alphabet[$j] . ' </span>'. $img .'</li>';
+                   $j+=1;
+              }
+            }
+            //DONE
+            $output .= '</ul>';
+
+       }
+
+     return $output;
+    }
+   add_shortcode( 'vc_image_checklist', 'vc_image_checklist_output');
+
+
+
+
+    function vc_image_checklist_mapping() {
+    // Stop all if VC is not enabled
+        if ( !defined( 'WPB_VC_VERSION' ) ) {
+            return;
+        }
+
+
+        // Map the block with vc_map()
+        vc_map(
+          array(
+            'name' => __('VC Image Checklist', 'bridge-child'),
+            'base' => 'vc_image_checklist',
+            'description' => __('Description', 'bridge-child'),
+            'content_element' => true,
+            'show_settings_on_create' => true,
+            'category' => __('Custom VC Elements', 'bridge-child'),
+            'params' => array(
+              array(
+                "type" => "attach_images",
+                "class" => "",
+                "heading" => __("Select Images", "bridge-child" ),
+                "param_name" => "images",
+                "description" => __( "Selecting images for output", "bridge-child" ),
+                'value' => __( "", 'bridge-child' ),
+              ),
+              array(
+                  'type' => 'textfield',
+                  'heading' => __('Extra class name', 'bridge-child'),
+                  'param_name' => 'el_class',
+                  'description' => __('If you wish to style particular content element differently, then use this field to add a class name and then refer to it in your css file.', 'bridge-child')
+              ),
+              array(
+                "type" => "textfield",
+                "heading" => "Image size",
+                "param_name" => "image_size",
+                "description" => "set image size",
+                ),
+               array(
+                "type" => "dropdown",
+                "class" => "",
+                "heading" => __( "Grid Type", "bridge-child" ),
+                "param_name" => "grid_type",
+                "description" => __( "Select the grid type from available options above", "bridge-child" ),
+                'value' => __( ['2x2', '3x3', '4x4', '5x5'], 'bridge-child'),
+              ),
+              //  array(
+              //   "type" => "dropdown",
+              //   "class" => "",
+              //   "heading" => __( "Chars", "bridge-child" ), //TODO change nameing
+              //   "param_name" => "char_select",
+              //   "description" => __( "Select", "bridge-child" ),
+              //   'value' => __( ['A', 'B', 'C', 'D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','R','U','V','W','X','Y','Z'], 'bridge-child' ),
+              // ),
+              //arr  TODO
+            )
+          )
+        );
+     }
+add_action( 'init', 'vc_image_checklist_mapping');
+
+
+/*
+//wpb_getImageBySize( array( 'attach_id' => (int) $image, 'thumb_size' => 'thumbnail' ) );
+                  // $output .= ( $img ? '<li>' . $img['thumbnail'] . '</li>' : '<li><input type="checkbox" class="img_check"><img width="150" height="150" test="' . $image . '" src="' . vc_asset_url( 'vc/blank.gif' ) . '" class="attachment-thumbnail" alt="" title="" /></li>');
+
+
+*/
+
+/*
+  $vc_params_list = array(
+  // Default
+  'textfield',
+  'dropdown',
+  'textarea_html',
+  'checkbox',
+  'posttypes',
+  'taxonomies',
+  'taxomonies',
+  'exploded_textarea',
+  'exploded_textarea_safe',
+  'textarea_raw_html',
+  'textarea_safe',
+  'textarea',
+  'attach_images',
+  'attach_image',
+  'widgetised_sidebars',
+  // Advanced
+  'colorpicker',
+  'loop',
+  'vc_link',
+  'options',
+  'sorted_list',
+  'css_editor',
+  'font_container',
+  'google_fonts',
+  'autocomplete',
+  'tab_id',
+  'href',
+  'params_preset',
+  'param_group',
+  'custom_markup',
+  'animation_style',
+  'iconpicker',
+  'el_id',
+);
+*/
+
+/*
+
+if($grid_type === '2x2'){
+                $output .= ( $img ? '<li>' . $img['thumbnail'] . '</li>' : '<li><input type="checkbox" class="img_check"><span class="custom--checkbox"></span><span class="custom--checkbox2"> ' . $alphabet[$i] . ' </span><img class="attachment-thumbnail oo_grid--2x2" test="' . $img . '" src="' . vc_asset_url( 'vc/blank.gif' ) . '" alt="" title="" /></li>');
+
+              }else if($grid_type === '3x3'){
+
+                $output .= ( $img ? '<li>' . $img['thumbnail'] . '</li>' : '<li><input type="checkbox" class="img_check"><span class="custom--checkbox"></span><span class="custom--checkbox2"> ' . $alphabet[$i] . ' </span>'.$img.'</li>');
+
+              }else if($grid_type === '4x4'){
+
+                $output .= ( $img ? '<li>' . $img['thumbnail'] . '</li>' : '<li><input type="checkbox" class="img_check"><span class="custom--checkbox"></span><span class="custom--checkbox2"> ' . $alphabet[$i] . ' </span>'.$img.'</li>');
+
+              }else if($grid_type === '5x5'){
+
+                $output .= ( $img ? '<li>' . $img['thumbnail'] . '</li>' : '<li><input type="checkbox" class="img_check"><span class="custom--checkbox"></span><span class="custom--checkbox2"> ' . $alphabet[$i] . ' </span>'.$img.'</li>');
+              }else{
+                $output .= ( $img ? '<li>' . $img['thumbnail'] . '</li>' : '<li><input type="checkbox" class="img_check"><span class="custom--checkbox"></span><span class="custom--checkbox2"> ' . $alphabet[$i] . ' </span><img class="attachment-thumbnail oo_grid--5x5" width="150" height="150" test="' . $img . '" src="' . vc_asset_url( 'vc/blank.gif' ) . '" alt="" title="" /></li>');
+              }
+
+*/

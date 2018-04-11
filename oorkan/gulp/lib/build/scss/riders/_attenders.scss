@@ -1,0 +1,54 @@
+// The filename here is temporary, it should be renamed and be abstract
+
+/*  ATTENDERS PEOPLE */
+
+.oo_attenders>li {
+  position: relative;
+}
+.oo_attenders>li>label{
+  position: absolute;
+  top:0;
+  right:0;
+  bottom: 0;
+  left: 0;
+  cursor: pointer;
+  padding: 15px 0;
+}
+.oo_attenders>li>label>span.people--amount {
+  position: absolute;
+  font-size: 18px;
+}
+.oo_attenders>li>label>span.custom--checkbox {
+  position: absolute;
+  top:0;
+  right:0;
+  bottom: 0;
+  left: 0;
+  border:1px solid transparent;
+}
+.oo_attenders>li>label>span.custom--checkbox:hover{
+  background-color: $color-hover;
+}
+.oo_attenders>li>label>input:checked ~ span.people--amount {
+  color:#FFF !important;
+}
+.oo_attenders>li>label>input:checked ~ span.custom--checkbox {
+  background-color: $color-main;
+}
+/* POSITIONING MIN MAX */
+.oo_attenders>p {
+  grid-column: 1 / 7;
+  grid-row: 2;
+  height:30px;
+  color: $color-main;
+}
+.oo_attenders>p>span {
+  position: absolute;
+  font-size: 15px;
+}
+.oo_attenders>p>.min {
+  left:0;
+}
+.oo_attenders>p>.max {
+  right:0;
+}

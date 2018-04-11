@@ -1,0 +1,25 @@
+
+/*========== Step2 / Step 5 ==========*/
+.oo_meeting_loc, .oo_purchase {
+  @include set-grid(2, 10px, center);
+  grid-auto-rows: minmax(45px, auto);
+  margin-bottom: 5%;
+}
+
+/*========== Step 2 ==========*/
+.oo_attenders {
+  @include set-grid(6, 0 , center);
+  grid-auto-rows: minmax(60px, auto);
+  border-collapse: collapse;
+}
+
+/*========== STEP 3 ==========*/
+.oo_grid-2x2{
+  @include set-grid(3, 20px, center);
+  grid-auto-rows: minmax(280px, auto);
+}
+/*========== Step 4 ==========*/
+.oo-hz_slider>ul{
+  @include set-grid(3, 40px, center);
+  grid-auto-rows: minmax(200px, auto);
+}
