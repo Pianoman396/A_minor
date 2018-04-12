@@ -1,12 +1,6 @@
 <?php abspath_check("ABSPATH"); require_once(vc_path_dir( "SHORTCODES_DIR", "vc-single-image.php" ));
 
-class WPBakeryShortCode_vc_image_checklist extends WPBakeryShortCode {}
-
-  function before_img($letter, $img_alt) {
-          $output .= "<label><input type='checkbox' class='img_check'><span class='custom--checkbox'></span><span class='custom--checkbox--letter'><i class='image_key'>" . $letter . "</i><i class='image_alt'>" . $img_alt . "</i></span><span class='label-wrapper'></span>";
-          // $out = explode(",",$output);
-          return $output;
-  }
+class WPBakeryShortCode_VC_image_checklist extends WPBakeryShortCode_VC_Single_image {}
 
   function vc_image_checklist_output($atts, $content = null){
     extract(
@@ -17,7 +11,6 @@ class WPBakeryShortCode_vc_image_checklist extends WPBakeryShortCode {}
           "image_size" => "full",
           "grid_type" => "2x2",
           "descript" => "",
-          "display" => "grid"
         ), $atts
       )
     );
@@ -32,66 +25,57 @@ class WPBakeryShortCode_vc_image_checklist extends WPBakeryShortCode {}
 
     if($images_ids):
       // Creating an alphabet array
-      $alphabet = range("A","Z"); $j = 0; $hz = "";  // iterators
+      $alphabet = range("A","Z"); $j = 0; // iterator
 
       // Setting image attributes array
       $img_atts = [
         "class" => "attachment-thumbnail",
-        "src"   => vc_asset_url("vc/blank.gif"),
+        "src"   => vc_asset_url( "vc/blank.gif" )
       ];
-                                      //class oo-hz_slider    replace to  (oo-slider)
-        $output .= "<div class='oo-".$display."'><h4 style='text-transform:none;'>". $descript ."</h4>";
+      if($grid_type === "4x4") {
+        $k = 1;
+        $output .= "<div class='oo-hz_slider'>";
+        $output .= "<h4 style='text-transform:none;'>". $descript ."</h4>";
+        $output .= "<ul>";
+        foreach ( $images_ids as $image_id ):
+          $img = wp_get_attachment_image($image_id, $image_size, $img_atts);
+          $img_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
 
+          $output .= "<li><label><input type='checkbox' class='img_check'><span class='custom--checkbox'></span><span class='custom--checkbox--letter'><i class='image_key'>" . $alphabet[$j] . "</i><i class='image_alt'>" . $img_alt . "</i></span><span class='label-wrapper'></span><span class='style_description'>". $img ."</label></li>"; $j++;
+          if($k % 3 === 0) {
+            $output .= "</ul><ul>";
+          }
+          $k++;
+        endforeach;
+        $output .= "</ul>";
+        $output .= "<div class='hz-buttons'>";
+        $output .= "<button class='hz-btn-prev'> <i class='fa fa-chevron-left' aria-hidden='true'></i> </button> <button class='hz-btn-next'><i class='fa fa-chevron-right' aria-hidden='true'></i> </button> </div>"; //hz btn
+        $output .= "</div>";
+      }
+      else {
 
-        $ul_class = ($display === "grid" ? "oo_grid-" . esc_attr($grid_type) : "");
-
-        $output .= "<ul class='". $ul_class ."'>";
-
-        $img_group = []; $imgalt_array = [];
-
-        // before_img function here
+        $output .= "<ul class='". esc_attr($el_class) ." oo_grid-". esc_attr($grid_type) ."' data-name=''><h4 style='text-transform:none;'>". $descript ."</h4>";
 
         foreach ( $images_ids as $image_id ):
           $img = wp_get_attachment_image($image_id, $image_size, $img_atts);
           $img_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
 
-          $alt_exists = array_search($img_alt, $imgalt_array);
-
-          if($alt_exists === false):
-            array_push($imgalt_array, $img_alt);
-            array_push($img_group,  before_img($alphabet[$j], $img_alt) . $img);
-          else:
-            $img_group[$alt_exists] .= $img;
-          endif; $j++;
-
+          $output .= "<li><label><input type='checkbox' class='img_check'><span class='custom--checkbox'></span><span class='custom--checkbox--letter'><i class='image_key'>" . $alphabet[$j] . "</i><i class='image_alt'>" . $img_alt . "</i></span><span class='label-wrapper'></span><span class='style_description'>". $img ."</label></li>"; $j++;
         endforeach;
 
-        array_walk($img_group, function(&$item){
-          $item = "<li>{$item}</label></li>";
-        });
-
-        if($display === "slider") {
-          $hz = "<div class='hz-buttons'><input type='button' class='hz-btn-prev'><input type='button' class='hz-btn-next'></div>";
-          array_walk($img_group, function(&$item, $key){
-            if($key % 3 === 0 && $key > 0) {
-              $item = "</ul><ul>{$item}";
-            }
-          });
-        }
-
-        $output .= join("", $img_group);
         $output .= "</ul>";
-        $output .= "{$hz}</div>";
-    endif;
+      }
 
+    endif;
+    // var_dump($output);exit;
     return $output;
   }
   add_shortcode( "vc_image_checklist", "vc_image_checklist_output");
 
 
 
-
 /**/
+
 
 
 
@@ -111,7 +95,6 @@ class WPBakeryShortCode_vc_image_checklist extends WPBakeryShortCode {}
             'content_element' => true,
             'show_settings_on_create' => true,
             'category' => __('Custom VC Elements', 'bridge-child'),
-            'icon' => get_template_directory_uri() . "/img/picture.png",
             'params' => array(/*
 
               */array(
@@ -143,7 +126,7 @@ class WPBakeryShortCode_vc_image_checklist extends WPBakeryShortCode {}
                 "heading" => "Image size",
                 "param_name" => "image_size",
                 "description" => "set image size",
-                ),/**
+                ),/*
 
               */array(
                 "type" => "dropdown",
@@ -151,18 +134,7 @@ class WPBakeryShortCode_vc_image_checklist extends WPBakeryShortCode {}
                 "heading" => __( "Grid Type", "bridge-child" ),
                 "param_name" => "grid_type",
                 "description" => __( "Select the grid type from available options above", "bridge-child" ),
-                "value" => __( ["2x2", "3x3", "4x4", "5x5"], "bridge-child"),
-                "std" => "2x2"
-              ),/*
-
-              */array(
-                "type" => "dropdown",
-                "class" => "",
-                "heading" => __( "Display", "bridge-child" ),
-                "param_name" => "display",
-                "description" => __( "Select the display type from available options above", "bridge-child" ),
-                "value" => __( ["slider", "grid"], "bridge-child"),
-                "std" => "grid"
+                'value' => __( ['2x2', '3x3', '4x4', '5x5'], 'bridge-child'),
               ),
             )
           )

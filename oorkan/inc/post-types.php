@@ -66,11 +66,10 @@
 			),
 		);
 
-
-		register_post_type( "quiz", $args_quiz );
-
+		register_post_type( "Quiz", $args_quiz);
 	}
 	add_action( "init", "custom_post_type" );
+
 
 	$args = array(
     // 'sanitize_callback' => 'sanitize_my_meta_key',
@@ -81,4 +80,77 @@
     'show_in_rest' => false,
 	);
   register_meta( 'quiz', 'step', $args);
+
+
+  function fields_test(){
+  	// ******** NEW POST META
+
+		$labels = array(
+			'name'               => __( 'Fields', 'bridge-child' ),
+			'singular_name'      => __( 'Field', 'bridge-child' ),
+			'add_new'            => _x( 'Add New Field', 'bridge-child' ),
+			'add_new_item'       => __( 'Add New Field', 'bridge-child' ),
+			'edit_item'          => __( 'Edit Field', 'bridge-child' ),
+			'new_item'           => __( 'New Field', 'bridge-child' ),
+			'view_item'          => __( 'View Field', 'bridge-child' ),
+			'search_items'       => __( 'Search Fields', 'bridge-child' ),
+			'not_found'          => __( 'No Fields found', 'bridge-child' ),
+			'not_found_in_trash' => __( 'No Fields found in Trash', 'bridge-child' ),
+			'parent_item_colon'  => __( 'Parent Singular Name:', 'bridge-child' ),
+			'menu_name'          => __( 'Fields', 'bridge-child' ),
+		);
+
+		$args = array(
+			'labels'              => $labels,
+			'hierarchical'        => false,
+			'description'         => 'A custom post type for creating fields',
+			'taxonomies'          => array(),
+			'public'              => true,
+			'show_ui'             => true,
+			'show_in_menu'        => true,
+			'show_in_admin_bar'   => true,
+			'menu_position'       => 50, // null
+			'menu_icon'           => null,
+			'show_in_nav_menus'   => true,
+			'publicly_queryable'  => true,
+			'exclude_from_search' => true,
+			'has_archive'         => false,
+			// 'query_var'           => true,
+			// 'can_export'          => true,
+			'rewrite'             => true,
+			'capability_type'     => 'post',
+			'supports'            => array(
+				'title',
+				'editor',
+				'author',
+				'thumbnail',
+				'excerpt',
+				'custom-fields',
+				'trackbacks',
+				/*'comments',*/
+				'revisions',
+				'page-attributes',
+				/*'post-formats',*/
+			),
+		);
+
+
+
+		register_post_type( "field", $args);
+
+  }
+  add_action( "init", "fields_test");
+
+
+	$argums = array(
+    // 'sanitize_callback' => 'sanitize_my_meta_key',
+    // 'auth_callback' => 'authorize_my_meta_key',
+    'type' => 'integer',
+    // 'description' => 'My registered meta key',
+    'single' => true,
+    'show_in_rest' => false,
+	);
+  register_meta( 'field', 'count', $argums);
+
+
  ?>
